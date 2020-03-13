@@ -17,7 +17,15 @@ const useGameState = () => {
         }
     });
 
-    const setGameState = (newCandidateNumbers) => {
+    const setGameState = (number, status) => {
+        if (status === 'used' || gameStatus() !== 'active') {
+            return;
+        }
+
+        const newCandidateNumbers = status === 'available' ?
+            candidateNumbers.concat(number) :
+            candidateNumbers.filter(cn => cn !== number);
+
         if (utils.sum(newCandidateNumbers) !== stars) {
             setCandidateNumbers(newCandidateNumbers);
         } else {
@@ -28,38 +36,25 @@ const useGameState = () => {
         }
     }
 
-    return { stars, availableNumbers, candidateNumbers, secondsLeft, setGameState };
-};
-
-const Game = (props) => {
-    const { stars, availableNumbers, candidateNumbers, secondsLeft, setGameState } = useGameState();
-
-    const candidatesAreWrong = utils.sum(candidateNumbers) > stars;
-
-    const gameStatus = availableNumbers.length === 0 ? 'won' :
-        secondsLeft === 0 ? 'lost' : 'active';
-
     const numberStatus = (number) => {
         if (!availableNumbers.includes(number)) {
             return 'used';
         }
         if (candidateNumbers.includes(number)) {
-            return candidatesAreWrong ? 'wrong' : 'candidate';
+            return utils.sum(candidateNumbers) > stars ? 'wrong' : 'candidate';
         }
         return 'available';
     };
 
-    const onNumberClicked = (number, status) => {
-        if (status === 'used' || gameStatus !== 'active') {
-            return;
-        }
+    const gameStatus = () => {
+        return availableNumbers.length === 0 ? 'won' :
+        secondsLeft === 0 ? 'lost' : 'active';}
 
-        const newCandidateNumbers = status === 'available' ?
-            candidateNumbers.concat(number) :
-            candidateNumbers.filter(cn => cn !== number);
+    return { stars, secondsLeft, numberStatus, gameStatus, setGameState };
+};
 
-        setGameState(newCandidateNumbers);
-    };
+const Game = (props) => {
+    const { stars, secondsLeft, numberStatus, gameStatus, setGameState } = useGameState();
 
     return (
         <div className="game">
@@ -69,15 +64,15 @@ const Game = (props) => {
             <div className="body">
                 <div className="left">
                     {
-                        gameStatus !== 'active' ? (
-                            <PlayAgain onClick={props.startNewGame} status={gameStatus} />
+                        gameStatus() !== 'active' ? (
+                            <PlayAgain onClick={props.startNewGame} status={gameStatus()} />
                         ) : (
-                                <StarsBoard count={stars} />
-                            )
+                            <StarsBoard count={stars} />
+                        )
                     }
                 </div>
                 <div className="right">
-                    {utils.range(1, 9).map(buttonId => <GameNumber key={buttonId} status={numberStatus(buttonId)} number={buttonId} onClick={onNumberClicked} />)}
+                    {utils.range(1, 9).map(buttonId => <GameNumber key={buttonId} status={numberStatus(buttonId)} number={buttonId} onClick={setGameState} />)}
                 </div>
             </div>
             <div className="timer">Time Remaining: {secondsLeft}</div>

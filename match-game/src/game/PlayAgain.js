@@ -5,7 +5,7 @@ const PlayAgain = props => (
         <div className="message" style={{ color: props.status === 'lost' ? 'red' : 'green' }}>
             {props.status === 'lost' ? 'Game over' : 'You won!'}
         </div>
-        <button onClick={props.onClick}>Play again</button>
+        <button onClick={props.onClick}>Play</button>
     </div>
 );
 
