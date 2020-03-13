@@ -22,7 +22,7 @@ const PlayAgain = props => (
     </div>
 );
 
-const Game = (props) => {
+const useGameState = () => {
     const [stars, setStars] = useState(utils.random(1, 9));
     const [availableNumbers, setAvailableNumbers] = useState(utils.range(1, 9));
     const [candidateNumbers, setCandidateNumbers] = useState([]);
@@ -34,6 +34,23 @@ const Game = (props) => {
             return () => clearTimeout(timerId);
         }
     });
+
+    const setGameState = (newCandidateNumbers) => {
+        if (utils.sum(newCandidateNumbers) !== stars) {
+            setCandidateNumbers(newCandidateNumbers);
+        } else {
+            const newAvailableNumbers = availableNumbers.filter(n => !newCandidateNumbers.includes(n));
+            setAvailableNumbers(newAvailableNumbers);
+            setCandidateNumbers([]);
+            setStars(utils.randomSumIn(newAvailableNumbers, 9));
+        }
+    }
+
+    return { stars, availableNumbers, candidateNumbers, secondsLeft, setGameState };
+};
+
+const Game = (props) => {
+    const { stars, availableNumbers, candidateNumbers, secondsLeft, setGameState } = useGameState();
 
     const candidatesAreWrong = utils.sum(candidateNumbers) > stars;
 
@@ -59,14 +76,7 @@ const Game = (props) => {
             candidateNumbers.concat(number) :
             candidateNumbers.filter(cn => cn !== number);
 
-        if (utils.sum(newCandidateNumbers) !== stars) {
-            setCandidateNumbers(newCandidateNumbers);
-        } else {
-            const newAvailableNumbers = availableNumbers.filter(n => !newCandidateNumbers.includes(n));
-            setAvailableNumbers(newAvailableNumbers);
-            setCandidateNumbers([]);
-            setStars(utils.randomSumIn(newAvailableNumbers, 9));
-        }
+        setGameState(newCandidateNumbers);
     };
 
     return (
