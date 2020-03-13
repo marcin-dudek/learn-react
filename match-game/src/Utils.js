@@ -27,12 +27,4 @@ const utils = {
     },
   };
 
-// Color Theme
-const colors = {
-    available: 'lightgray',
-    used: 'lightgreen',
-    wrong: 'lightcoral',
-    candidate: 'deepskyblue',
-  };
-
-export {utils, colors}
+export default utils;

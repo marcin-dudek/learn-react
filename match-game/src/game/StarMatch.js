@@ -1,26 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { utils, colors } from './Utils'
-
-const GameNumber = props => (
-    <button className="number" style={{ backgroundColor: colors[props.status] }} onClick={() => props.onClick(props.number, props.status)}>
-        {props.number}
-    </button>
-);
-
-const StarsBoard = props => (
-    <>
-        {utils.range(1, props.count).map(starId => <div key={starId} className="star" />)}
-    </>
-);
-
-const PlayAgain = props => (
-    <div className="game-done">
-        <div className="message" style={{ color: props.status === 'lost' ? 'red' : 'green' }}>
-            {props.status === 'lost' ? 'Game over' : 'You won!'}
-        </div>
-        <button onClick={props.onClick}>Play again</button>
-    </div>
-);
+import utils from '../Utils'
+import StarsBoard from './StarsBoard'
+import PlayAgain from './PlayAgain'
+import GameNumber from './GameNumber'
 
 const useGameState = () => {
     const [stars, setStars] = useState(utils.random(1, 9));
