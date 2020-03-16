@@ -1,0 +1,15 @@
+{
+  "name": "basic-hooks",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev":"yarn next",
+    "start":"yarn next build & yarn next start"
+  },
+  "dependencies": {
+    "next": "^9.3.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
+  }
+}
