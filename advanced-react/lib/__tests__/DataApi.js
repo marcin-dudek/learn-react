@@ -1,4 +1,4 @@
-import DataApi from '../DataApi';
+import DataApi from '../api/DataApi';
 import {data} from '../data';
 
 const api = new DataApi(data);

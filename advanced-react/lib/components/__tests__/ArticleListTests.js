@@ -9,7 +9,7 @@ describe('ArticleList', () => {
       a: {id: 'a', date: '2020-04-01'},
       b: {id: 'b', date: '2020-04-01'},
     },
-    getAuthor: jest.fn(id => ({
+    getAuthor: jest.fn(_ => ({
       firstName: 'Marcin',
       lastName: 'Dudek',
       website: 'https://google.com',
