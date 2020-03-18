@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useMemo} from 'react';
+import React, {useState, useMemo} from 'react';
 import ArticleList from './ArticleList';
 import AppBar from '@material-ui/core/AppBar';
 import DescriptionIcon from '@material-ui/icons/Description';
