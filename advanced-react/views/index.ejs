@@ -4,12 +4,18 @@
   <head>
     <meta charset="utf-8" />
 
-    <title>Advanced React</title>
+    <title>Articles</title>
     <meta name="author" content="Marcin Dudek" />
+    <style id="jss-server-side">
+      <%- cssData -%>
+    </style>
+    <script type="text/javascript">
+      window.initialData =  <%- JSON.stringify(data) -%>
+    </script>
   </head>
 
   <body>
-    <div id="root"><%- initialContent -%></div>
+    <div id="root"><%- content -%></div>
 
     <script src="bundle.js" charset="utf-8"></script>
   </body>

@@ -1,5 +1,4 @@
 import React, {useState, useEffect, useMemo} from 'react';
-import DataApi from 'api/DataApi';
 import ArticleList from './ArticleList';
 import AppBar from '@material-ui/core/AppBar';
 import DescriptionIcon from '@material-ui/icons/Description';
@@ -8,11 +7,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import {ThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import axios from 'axios';
 
 const App = props => {
-  const [authors, setAuthors] = useState(props.authors);
-  const [articles, setArticles] = useState(props.articles);
+  const [store, setAuthors] = useState(props.store);
 
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
@@ -25,17 +22,15 @@ const App = props => {
       }),
     [prefersDarkMode]
   );
-  useEffect(() => {
-    const fn = async () => {
-      const response = await axios.get('/data');
-      const api = new DataApi(response.data);
-      setAuthors(api.getAuthors());
-      setArticles(api.getArticles());
-    };
-    fn();
-  }, []);
-
-  const getAuthor = authorId => authors[authorId];
+  // useEffect(() => {
+  //   const fn = async () => {
+  //     const response = await axios.get('/data');
+  //     const api = new StoreApi(response.data);
+  //     setAuthors(api.getAuthors());
+  //     setArticles(api.getArticles());
+  //   };
+  //   fn();
+  // }, []);
 
   return (
     <>
@@ -49,7 +44,7 @@ const App = props => {
             </Typography>
           </Toolbar>
         </AppBar>
-        <ArticleList articles={articles} getAuthor={getAuthor} />
+        <ArticleList store={store} />
       </ThemeProvider>
     </>
   );

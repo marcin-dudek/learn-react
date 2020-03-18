@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import Avatar from '@material-ui/core/Avatar';
@@ -10,13 +11,17 @@ import Button from '@material-ui/core/Button';
 const toISODate = date => {
   const pad = s => (s < 10 ? '0' + s : s);
   return (
-    date.getUTCFullYear() + '-' + pad(date.getUTCMonth()+1) + '-' + pad(date.getUTCDate())
+    date.getUTCFullYear() +
+    '-' +
+    pad(date.getUTCMonth() + 1) +
+    '-' +
+    pad(date.getUTCDate())
   );
 };
 
 const Article = props => {
-  const {article, getAuthor} = props;
-  const author = getAuthor(article.authorId);
+  const {article, store} = props;
+  const author = store.lookupAuthor(article.authorId);
 
   return (
     <Card style={{maxWidth: 600, marginTop: 10}}>
@@ -42,6 +47,14 @@ const Article = props => {
       </CardActions>
     </Card>
   );
+};
+
+Article.propTypes = {
+  article: PropTypes.shape({
+    date: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    body: PropTypes.string.isRequired,
+  }),
 };
 
 export default Article;

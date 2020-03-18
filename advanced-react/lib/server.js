@@ -10,7 +10,7 @@ app.set('view engine', 'ejs');
 
 app.get('/', async (_, res) => {
   const content = await serverRender();
-  res.render('index', {initialContent: content});
+  res.render('index', {...content});
 });
 
 app.get('/data', (_, res) => {

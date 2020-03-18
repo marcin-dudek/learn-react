@@ -1,9 +1,9 @@
-import DataApi from '../api/DataApi';
 import {data} from '../data';
+import StoreApi from '../api/StoreApi';
 
-const api = new DataApi(data);
+const api = new StoreApi(data);
 
-describe('DataApi', () => {
+describe('StoreApi', () => {
   it('exposes articles as an object', () => {
     const articles = api.getArticles();
 

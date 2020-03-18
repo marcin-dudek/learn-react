@@ -4,12 +4,12 @@ import ArticleList from '../ArticleList';
 import renderer from 'react-test-renderer';
 
 describe('ArticleList', () => {
-  const data = {
-    articles: {
+  const store = {
+    getArticles: jest.fn(() => ({
       a: {id: 'a', date: '2020-04-01'},
       b: {id: 'b', date: '2020-04-01'},
-    },
-    getAuthor: jest.fn(_ => ({
+    })),
+    lookupAuthor: jest.fn(() => ({
       firstName: 'Marcin',
       lastName: 'Dudek',
       website: 'https://google.com',
@@ -17,7 +17,7 @@ describe('ArticleList', () => {
   };
 
   it('renders correctly', () => {
-    const tree = renderer.create(<ArticleList {...data} />).toJSON();
+    const tree = renderer.create(<ArticleList store={store} />).toJSON();
 
     expect(tree.children.length).toBe(2);
     expect(tree).toMatchSnapshot();
