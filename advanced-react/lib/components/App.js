@@ -1,4 +1,4 @@
-import React, {useState, useMemo} from 'react';
+import React, {useMemo} from 'react';
 import ArticleList from './ArticleList';
 import AppBar from '@material-ui/core/AppBar';
 import DescriptionIcon from '@material-ui/icons/Description';
@@ -8,9 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import {ThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
-const App = props => {
-  const [store, setAuthors] = useState(props.store);
-
+const App = () => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
   const theme = useMemo(
@@ -22,15 +20,6 @@ const App = props => {
       }),
     [prefersDarkMode]
   );
-  // useEffect(() => {
-  //   const fn = async () => {
-  //     const response = await axios.get('/data');
-  //     const api = new StoreApi(response.data);
-  //     setAuthors(api.getAuthors());
-  //     setArticles(api.getArticles());
-  //   };
-  //   fn();
-  // }, []);
 
   return (
     <>
@@ -44,7 +33,7 @@ const App = props => {
             </Typography>
           </Toolbar>
         </AppBar>
-        <ArticleList store={store} />
+        <ArticleList />
       </ThemeProvider>
     </>
   );

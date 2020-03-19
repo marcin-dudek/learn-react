@@ -31,6 +31,11 @@ exports[`ArticleList renders correctly 1`] = `
         className="MuiCardHeader-content"
       >
         <span
+          className="MuiTypography-root MuiCardHeader-title MuiTypography-body2 MuiTypography-displayBlock"
+        >
+          Title A
+        </span>
+        <span
           className="MuiTypography-root MuiCardHeader-subheader MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-displayBlock"
         >
           2020-04-01
@@ -42,7 +47,9 @@ exports[`ArticleList renders correctly 1`] = `
     >
       <p
         className="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextSecondary"
-      />
+      >
+        Body A
+      </p>
     </div>
     <div
       className="MuiCardActions-root MuiCardActions-spacing"
@@ -101,6 +108,11 @@ exports[`ArticleList renders correctly 1`] = `
         className="MuiCardHeader-content"
       >
         <span
+          className="MuiTypography-root MuiCardHeader-title MuiTypography-body2 MuiTypography-displayBlock"
+        >
+          Title B
+        </span>
+        <span
           className="MuiTypography-root MuiCardHeader-subheader MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-displayBlock"
         >
           2020-04-01
@@ -112,7 +124,9 @@ exports[`ArticleList renders correctly 1`] = `
     >
       <p
         className="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextSecondary"
-      />
+      >
+        Body B
+      </p>
     </div>
     <div
       className="MuiCardActions-root MuiCardActions-spacing"
