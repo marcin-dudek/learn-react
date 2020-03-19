@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, useContext} from 'react';
 import ArticleList from './ArticleList';
 import AppBar from '@material-ui/core/AppBar';
 import DescriptionIcon from '@material-ui/icons/Description';
@@ -7,9 +7,12 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import {ThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import SearchBar from './SearchBar';
+import ArticleContext from './ArticleContext';
 
 const App = () => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const store = useContext(ArticleContext);
 
   const theme = useMemo(
     () =>
@@ -21,6 +24,8 @@ const App = () => {
     [prefersDarkMode]
   );
 
+  const setSearchTerm = newFilter => store.setFilter(newFilter);
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -31,6 +36,7 @@ const App = () => {
             <Typography variant="h6" color="inherit" noWrap>
               Articles
             </Typography>
+            <SearchBar doSearch={setSearchTerm} />
           </Toolbar>
         </AppBar>
         <ArticleList />
