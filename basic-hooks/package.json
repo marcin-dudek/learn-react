@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev":"yarn next",
-    "start":"yarn next build & yarn next start"
+    "dev": "yarn next",
+    "start": "yarn next build & yarn next start"
   },
   "dependencies": {
     "next": "^9.3.0",
