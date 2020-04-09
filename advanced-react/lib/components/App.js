@@ -1,4 +1,4 @@
-import React, {useMemo, useContext} from 'react';
+import React, {useMemo, useContext, useCallback, memo} from 'react';
 import ArticleList from './ArticleList';
 import AppBar from '@material-ui/core/AppBar';
 import DescriptionIcon from '@material-ui/icons/Description';
@@ -24,7 +24,7 @@ const App = () => {
     [prefersDarkMode]
   );
 
-  const setSearchTerm = newFilter => store.setFilter(newFilter);
+  const setSearchTerm = useCallback((newFilter) => store.setFilter(newFilter));
 
   return (
     <>
@@ -45,4 +45,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default memo(App);

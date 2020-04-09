@@ -1,11 +1,11 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useCallback, memo} from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import {fade, makeStyles} from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -45,19 +45,22 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SearchBar = props => {
+const SearchBar = (props) => {
+  const {doSearch} = {...props};
   const classes = useStyles();
   const [value, setValue] = useState('');
   const search = useRef(
-    debounce(q => {
-      props.doSearch(q);
+    debounce((q) => {
+      doSearch(q);
     }, 600)
   ).current;
 
-  const handleChange = e => {
-    setValue(e.target.value);
-    search(e.target.value);
-  };
+  const handleChange = useCallback((e) => {
+    if (value !== e.target.value) {
+      setValue(e.target.value);
+      search(e.target.value);
+    }
+  });
 
   return (
     <div className={classes.search}>
@@ -82,4 +85,6 @@ SearchBar.propTypes = {
   doSearch: PropTypes.func.isRequired,
 };
 
-export default SearchBar;
+// SearchBar.whyDidYouRender = true;
+
+export default memo(SearchBar);

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, memo} from 'react';
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -59,4 +59,4 @@ Article.propTypes = {
   }),
 };
 
-export default Article;
+export default memo(Article);

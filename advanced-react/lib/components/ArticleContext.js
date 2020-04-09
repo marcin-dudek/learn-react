@@ -1,5 +1,5 @@
 import React from 'react';
 
-const ArticleContext = React.createContext({x: 'x'});
+const ArticleContext = React.createContext();
 
 export default ArticleContext;
