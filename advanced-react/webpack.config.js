@@ -8,7 +8,7 @@ module.exports = {
   },
   entry: ['@babel/polyfill', './lib/renderers/dom.js'],
   output: {
-    filename: 'bundle.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'public'),
   },
   module: {
@@ -20,8 +20,10 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new webpack.ProgressPlugin(),
-    //new HtmlWebpackPlugin({template: './src/index.html'})
-  ],
+  plugins: [new webpack.ProgressPlugin()],
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
 };
