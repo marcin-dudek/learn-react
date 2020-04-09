@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "set NODE_PATH=./lib&& yarn nodemon --exec babel-node lib/server.js --watch",
     "wp": "yarn webpack -wd",
-    "test": "yarn jest --watch"
+    "test": "yarn jest --watch",
+    "prod":"yarn webpack -p"
   },
   "babel": {
     "presets": [
