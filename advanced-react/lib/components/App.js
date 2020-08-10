@@ -27,21 +27,19 @@ const App = () => {
   const setSearchTerm = useCallback((newFilter) => store.setFilter(newFilter));
 
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <AppBar position="relative">
-          <Toolbar>
-            <DescriptionIcon edge="start" />
-            <Typography variant="h6" color="inherit" noWrap>
-              Articles
-            </Typography>
-            <SearchBar doSearch={setSearchTerm} />
-          </Toolbar>
-        </AppBar>
-        <ArticleList />
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AppBar position="relative">
+        <Toolbar>
+          <DescriptionIcon edge="start" />
+          <Typography variant="h6" color="inherit" noWrap>
+            Articles
+          </Typography>
+          <SearchBar doSearch={setSearchTerm} />
+        </Toolbar>
+      </AppBar>
+      <ArticleList />
+    </ThemeProvider>
   );
 };
 
